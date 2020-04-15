@@ -16,7 +16,7 @@ Dê um `fork` nesse repositório e clone para sua máquina local:
 
 ```bash
 
-git clone https://github.com/<seu-nome-de-usuario-github>/frontend-vsf.git
+git clone https://github.com/<seu-nome-de-usuario-github>/limos-hackathon.git
 
 ```
 
@@ -113,7 +113,7 @@ Entre na pasta do projeto e, no `branch master`, adicione como repositório remo
 
 ```bash
 
-git remote add upstream https://github.com/Vale-Sem-Fome/frontend-vsf.git
+git remote add upstream https://github.com/maikvinicius/limos-hackathon.git
 
 ```
 
