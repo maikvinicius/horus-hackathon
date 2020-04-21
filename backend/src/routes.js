@@ -2,8 +2,10 @@ const express = require('express');
 const routes = express.Router();
 const config = require('./config/mongoose');
 
-const HelloWorldController = require('./controllers/HelloWorldController');
+const GeneratePeopleController = require('./controllers/GeneratePeople');
+const RandomGeoCoordinatesController = require('./controllers/RandomGeoCoordinatesController');
 
-routes.get("/", HelloWorldController.getHelloWorld);
+routes.post('/generate-people', GeneratePeopleController.generatePeople);
+routes.post('/random-geo-coordinates', RandomGeoCoordinatesController.generateRandomGeoCoordinates);
 
 module.exports = routes;
