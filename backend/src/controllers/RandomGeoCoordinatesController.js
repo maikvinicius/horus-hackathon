@@ -6,6 +6,8 @@ class RandomGeoCoordinatesController {
             randomArray = [];
 
         let productsArray = products.split(',').map(item => item.trim());
+        
+        let sexArray = ['Masculino', 'Feminino', 'Outros'];
 
         for (let i = 0; i < number_random_point; i++) {
             let random = (latitude, longitude, radius) => {
@@ -27,7 +29,9 @@ class RandomGeoCoordinatesController {
                 return {
                     'latitude': newlat.toFixed(5),
                     'longitude': newlon.toFixed(5),
-                    'product': productsArray[Math.floor(Math.random() * productsArray.length)]
+                    'product': productsArray[Math.floor(Math.random() * productsArray.length)],
+                    'sex': sexArray[Math.floor(Math.random() * sexArray.length)],
+                    'age': Math.floor(Math.random() * 63 + 13)
                 };
             }
             randomArray.push(random(latitude, longitude, radius));
