@@ -1,9 +1,11 @@
 class RandomGeoCoordinatesController {
 
     async generateRandomGeoCoordinates(req, res) {
-        let { latitude, longitude, radius } = req.body,
+        let { latitude, longitude, radius, products } = req.body,
             number_random_point = ( radius / 100 ) * 5,
             randomArray = [];
+
+        let productsArray = products.split(',').map(item => item.trim());
 
         for (let i = 0; i < number_random_point; i++) {
             let random = (latitude, longitude, radius) => {
@@ -24,7 +26,8 @@ class RandomGeoCoordinatesController {
             
                 return {
                     'latitude': newlat.toFixed(5),
-                    'longitude': newlon.toFixed(5)
+                    'longitude': newlon.toFixed(5),
+                    'product': productsArray[Math.floor(Math.random() * productsArray.length)]
                 };
             }
             randomArray.push(random(latitude, longitude, radius));
