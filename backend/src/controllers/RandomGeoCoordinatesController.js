@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 class RandomGeoCoordinatesController {
 
     async generateRandomGeoCoordinates(req, res) {
@@ -31,7 +33,7 @@ class RandomGeoCoordinatesController {
                     'longitude': newlon.toFixed(5),
                     'product': productsArray[Math.floor(Math.random() * productsArray.length)],
                     'sex': sexArray[Math.floor(Math.random() * sexArray.length)],
-                    'age': Math.floor(Math.random() * 63 + 13)
+                    'age': Math.floor(Math.random() * 60 + 13)
                 };
             }
             randomArray.push(random(latitude, longitude, radius));
