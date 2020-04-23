@@ -6,35 +6,15 @@ const cors = require('cors');
 const GeneratePeopleController = require('./controllers/GeneratePeople');
 const RandomGeoCoordinatesController = require('./controllers/RandomGeoCoordinatesController');
 
-express.all('*', function(req, res,next) {
-    /**
-     * Response settings
-     * @type {Object}
-     */
-    var responseSettings = {
-        "AccessControlAllowOrigin": req.headers.origin,
-        "AccessControlAllowHeaders": "Content-Type,X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5,  Date, X-Api-Version, X-File-Name",
-        "AccessControlAllowMethods": "POST, GET, PUT, DELETE, OPTIONS",
-        "AccessControlAllowCredentials": true
-    };
-
-    /**
-     * Headers
-     */
-    res.header("Access-Control-Allow-Credentials", responseSettings.AccessControlAllowCredentials);
-    res.header("Access-Control-Allow-Origin",  responseSettings.AccessControlAllowOrigin);
-    res.header("Access-Control-Allow-Headers", (req.headers['access-control-request-headers']) ? req.headers['access-control-request-headers'] : "x-requested-with");
-    res.header("Access-Control-Allow-Methods", (req.headers['access-control-request-method']) ? req.headers['access-control-request-method'] : responseSettings.AccessControlAllowMethods);
-
-    if ('OPTIONS' == req.method) {
-        res.send(200);
-    }
-    else {
-        next();
-    }
-
-
+express.use(function (req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3333');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    next();
 });
+  
+express.use(cors({ credentials: true, origin: true }));
 
 routes.post('/generate-people', GeneratePeopleController.generatePeople);
 routes.post('/random-geo-coordinates', RandomGeoCoordinatesController.generateRandomGeoCoordinates);
