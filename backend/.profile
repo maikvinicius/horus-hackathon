@@ -1,1 +1,1 @@
-chmod -R 755 src/assets
+chmod -R 777 src/assets
