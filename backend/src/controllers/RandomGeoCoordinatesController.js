@@ -1,4 +1,4 @@
-const fs = require('fs');
+const fs = require('fs').promises;
 const assetsPath = 'src/assets/';
 
 const RandomGeoCoordinates = require('../models/RandomGeoCoordinates');
@@ -6,7 +6,7 @@ const RandomGeoCoordinates = require('../models/RandomGeoCoordinates');
 class RandomGeoCoordinatesController {
 
     async generateRandomGeoCoordinates(req, res) {
-        let { latitude, longitude, radius, products } = req.body,
+        var { latitude, longitude, radius, products } = req.body,
             numberRandomPoints = ( radius / 100 ) * 5,
             returnData = [];
 
@@ -26,25 +26,31 @@ class RandomGeoCoordinatesController {
         };
 
         const requestParams = await RandomGeoCoordinates.findOne(searchData);
-
+        
         if (requestParams) {
-            returnData = await RandomGeoCoordinatesController.jsonSaved(requestParams.file_name);
+            returnData = await RandomGeoCoordinatesController.jsonSaved(requestParams.file_name)
+                                                             .catch((error) => console.log(error));
         } else {
             let randomArray = await RandomGeoCoordinatesController.randomCoordinates(longitude, latitude, radius, productsArray, numberRandomPoints);
-    
-            let fileName = await RandomGeoCoordinatesController.saveJson(randomArray);
+            
+            let fileName = await RandomGeoCoordinatesController.saveJson(randomArray)
+                                                               .catch((error) => console.log(error));
 
             const location = {
                 type: 'Point',
-                coordinates: [longitude, latitude]
+                coordinates: [Number(longitude), Number(latitude)]
             }
-
+            
             await RandomGeoCoordinates.create({
-                location,
-                radius,
+                location: location,
+                radius: radius,
                 products: productsArray,
                 file_name: fileName
+            }, function (error) {
+                console.log(error);
             });
+
+            returnData = randomArray;
         }
 
         return res.json({
@@ -89,29 +95,21 @@ class RandomGeoCoordinatesController {
     }
 
     static async jsonSaved(jsonName) {
-        try {
-            return fs.readFileSync(assetsPath + jsonName, 'utf8', (error) => {
-                console.log(error);
-            });
-        } catch (error) {
-            console.log(error);
-            return false;
-        }
+        return new Promise(async (resolve, reject) => {
+            const json = await fs.readFile(assetsPath + jsonName, 'utf8')
+                                 .catch(reject('Unable to write ' + jsonName));
+            resolve(json);
+        });
     };
 
     static async saveJson(data) {
-        try {
+        return new Promise(async (resolve, reject) => {
             let jsonName = Date.now() + '.json';
 
-            fs.writeFileSync(assetsPath + jsonName, JSON.stringify(data), 'utf8', (error) => {
-                console.log(error);
-            });
-
-            return jsonName;
-        } catch (error) {
-            console.log(error);
-            return false;
-        }
+            await fs.writeFile(assetsPath + jsonName, JSON.stringify(data), 'utf8')
+                    .then(resolve(jsonName))
+                    .catch(reject('Unable to write ' + jsonName));
+        });
     }
 }
 
