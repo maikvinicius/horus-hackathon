@@ -1,24 +1,26 @@
 const mongoose = require('mongoose');
 
+const Schema = mongoose.Schema;
+
 const PointSchema = require('./utils/PointSchema');
 
-const RandomGeoCoordinates = mongoose.Schema({
+const RandomGeoCoordinates = new Schema({
     location: {
         type: PointSchema,
         index: '2dsphere',
-        required: false
+        required: true
     },
     radius: {
         type: String,
-        required: false
+        required: true
     },
     products: {
         type: [String],
-        required: false
+        required: true
     },
     file_name: {
         type: String,
-        required: false
+        required: true
     }
 });
 
