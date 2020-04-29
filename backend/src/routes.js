@@ -8,10 +8,13 @@ const GeneratePeopleController = require('./controllers/GeneratePeople');
 const RandomGeoCoordinatesController = require('./controllers/RandomGeoCoordinatesController');
 
 routes.post('/generate-people', GeneratePeopleController.generatePeople);
+
 routes.post('/random-geo-coordinates', [
     body('latitude')
         .not().isEmpty(), 
     body('longitude')
+        .not().isEmpty(),
+    body('city')
         .not().isEmpty(),
     body('radius')
         .not().isEmpty(), 

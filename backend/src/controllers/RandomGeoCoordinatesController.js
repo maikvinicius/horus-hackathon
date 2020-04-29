@@ -1,4 +1,5 @@
 const fs = require('fs');
+const axios = require('axios');
 const { validationResult } = require('express-validator');
 const assetsPath = 'src/assets/';
 
@@ -15,8 +16,7 @@ class RandomGeoCoordinatesController {
             });
         }
 
-        var { latitude, longitude, radius, products } = req.body,
-            numberRandomPoints = ( radius / 100 ) * 5,
+        let { latitude, longitude, city, radius, products } = req.body,
             returnData = [];
 
         let productsArray = products.split(',').map(item => item.trim());
@@ -31,20 +31,29 @@ class RandomGeoCoordinatesController {
                 }
             },
             radius,
-            products: { $all: productsArray }
+            products: {
+                $size: productsArray.length,
+                $all: productsArray
+            }
         };
 
         const requestParams = await RandomGeoCoordinates.findOne(searchData);
-        
+
         if (requestParams) {
+            console.log("Reading JSON");
             returnData = await RandomGeoCoordinatesController.jsonSaved(requestParams.file_name)
-                                                             .catch((error) => console.log(error));
+                .catch((error) => console.log(error));
         } else {
-            let randomArray = await RandomGeoCoordinatesController.randomCoordinates(longitude, latitude, radius, productsArray, numberRandomPoints);
-            
+            console.log("Generate new random data");
+            let demoDensity = await RandomGeoCoordinatesController.demographicDensity(city);
+
+            let amountPoints = demoDensity * (radius / 1000) * (Math.floor(Math.random() * 4 + 2) / 100);
+
+            let randomArray = await RandomGeoCoordinatesController.randomData(longitude, latitude, radius, productsArray, amountPoints);
+
             let fileName = Date.now() + '.json';
 
-            const location = {
+            let location = {
                 type: 'Point',
                 coordinates: [Number(longitude), Number(latitude)]
             }
@@ -59,10 +68,12 @@ class RandomGeoCoordinatesController {
             });
 
             await RandomGeoCoordinatesController.saveJson(fileName, randomArray)
-                                                .catch((error) => console.log(error));
+                .catch((error) => console.log(error));
 
             returnData = randomArray;
         }
+
+        console.log(returnData.length);
 
         return res.json({
             success: true,
@@ -70,27 +81,27 @@ class RandomGeoCoordinatesController {
         });
     }
 
-    static async randomCoordinates(longitude, latitude, radius, productsArray, numberRandomPoints) {
-        let tempArray = [],
+    static async randomData(longitude, latitude, radius, productsArray, amountRandomPoints) {
+        let dataArray = [],
             sexArray = ['Masculino', 'Feminino', 'Outros'];
 
-        for (let i = 0; i < numberRandomPoints; i++) {
-            let random = (latitude, longitude, radius) => {
-                let y0 = Number(latitude);
-                let x0 = Number(longitude);
-                let rd = Number(radius) / 111300;
-            
-                let u = Math.random();
-                let v = Math.random();
-            
-                let w = rd * Math.sqrt(u);
-                let t = 2 * Math.PI * v;
-                let x = w * Math.cos(t);
-                let y = w * Math.sin(t);
-            
-                let newlat = y + y0;
-                let newlon = x + x0;
-            
+        for (let i = 0; i < amountRandomPoints; i++) {
+            let randomObject = (latitude, longitude, radius) => {
+                let y0 = Number(latitude),
+                    x0 = Number(longitude),
+                    rd = Number(radius) / 111300;
+
+                let u = Math.random(),
+                    v = Math.random();
+
+                let w = rd * Math.sqrt(u),
+                    t = 2 * Math.PI * v,
+                    x = w * Math.cos(t),
+                    y = w * Math.sin(t);
+
+                let newlat = y + y0,
+                    newlon = x + x0;
+
                 return {
                     'latitude': newlat.toFixed(5),
                     'longitude': newlon.toFixed(5),
@@ -99,17 +110,16 @@ class RandomGeoCoordinatesController {
                     'age': Math.floor(Math.random() * 60 + 13)
                 };
             }
-            tempArray.push(random(latitude, longitude, radius));
+            dataArray.push(randomObject(latitude, longitude, radius));
         }
 
-        return tempArray;
+        return dataArray;
     }
 
     static async jsonSaved(jsonName) {
         try {
-            const json = await fs.readFileSync(assetsPath + jsonName, 'utf8');
-            return JSON.parse(json);
-        } catch(error) {
+            return JSON.parse(await fs.readFileSync(assetsPath + jsonName, 'utf8'));
+        } catch (error) {
             console.log(error);
             return false;
         }
@@ -118,10 +128,27 @@ class RandomGeoCoordinatesController {
     static async saveJson(jsonName, data) {
         try {
             return await fs.writeFileSync(assetsPath + jsonName, JSON.stringify(data), 'utf8');
-        } catch(error) {
+        } catch (error) {
             console.log(error);
             return false;
         }
+    }
+
+    static async demographicDensity(cityName) {
+        let ibgeCodesJson = JSON.parse(await fs.readFileSync(assetsPath + 'ibge_codes.json', 'utf8'));
+
+        let ibgeCode = Object.keys(ibgeCodesJson).find(key => ibgeCodesJson[key] == cityName);
+
+        let url = "http://api.sidra.ibge.gov.br/values/t/1301/p/2010/v/616/n6/" + ibgeCode;
+
+        return await axios.get(url)
+            .then((response) => {
+                return response.data[1].V;
+            })
+            .catch((error) => {
+                console.log(error);
+                return false;
+            });
     }
 }
 
