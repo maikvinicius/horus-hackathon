@@ -11,7 +11,8 @@
     "axios": "^0.19.2",
     "express": "^4.17.1",
     "express-validator": "^6.4.0",
-    "mongoose": "^5.9.9"
+    "mongoose": "^5.9.9",
+    "weighted-random": "^0.1.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.3"

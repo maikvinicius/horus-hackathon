@@ -1,7 +1,10 @@
 const fs = require('fs');
 const axios = require('axios');
+const weightedRandom = require('weighted-random');
 const { validationResult } = require('express-validator');
+
 const assetsPath = 'src/assets/';
+const ibgeUrl = 'http://api.sidra.ibge.gov.br/values/t/1301/p/2010/v/616/n6/';
 
 const RandomGeoCoordinates = require('../models/RandomGeoCoordinates');
 
@@ -40,15 +43,13 @@ class RandomGeoCoordinatesController {
         const requestParams = await RandomGeoCoordinates.findOne(searchData);
 
         if (requestParams) {
-            console.log("Reading JSON");
             returnData = await RandomGeoCoordinatesController.jsonSaved(requestParams.file_name)
                 .catch((error) => console.log(error));
         } else {
-            console.log("Generate new random data");
             let demoDensity = await RandomGeoCoordinatesController.demographicDensity(city);
 
-            let amountPoints = demoDensity * (radius / 1000) * (Math.floor(Math.random() * 4 + 2) / 100);
-
+            let amountPoints = demoDensity * (radius / 1000) * (Math.floor(Math.random() * 19 + 1) / 100);
+            
             let randomArray = await RandomGeoCoordinatesController.randomData(longitude, latitude, radius, productsArray, amountPoints);
 
             let fileName = Date.now() + '.json';
@@ -73,8 +74,6 @@ class RandomGeoCoordinatesController {
             returnData = randomArray;
         }
 
-        console.log(returnData.length);
-
         return res.json({
             success: true,
             data: returnData
@@ -83,7 +82,17 @@ class RandomGeoCoordinatesController {
 
     static async randomData(longitude, latitude, radius, productsArray, amountRandomPoints) {
         let dataArray = [],
-            sexArray = ['Masculino', 'Feminino', 'Outros'];
+            qtSex = Math.floor(Math.random() * 70);
+
+        let sexArray = [
+            { weight: qtSex, sex: 'Masculino' },
+            { weight: 80 - qtSex, sex: 'Feminino' },
+            { weight: 20, sex: 'Outros' }
+        ];
+
+        let weights = sexArray.map((sex) => {
+            return sex.weight;
+        }); 
 
         for (let i = 0; i < amountRandomPoints; i++) {
             let randomObject = (latitude, longitude, radius) => {
@@ -106,7 +115,7 @@ class RandomGeoCoordinatesController {
                     'latitude': newlat.toFixed(5),
                     'longitude': newlon.toFixed(5),
                     'product': productsArray[Math.floor(Math.random() * productsArray.length)],
-                    'sex': sexArray[Math.floor(Math.random() * sexArray.length)],
+                    'sex': sexArray[weightedRandom(weights)].sex,
                     'age': Math.floor(Math.random() * 60 + 13)
                 };
             }
@@ -123,7 +132,7 @@ class RandomGeoCoordinatesController {
             console.log(error);
             return false;
         }
-    };
+    }
 
     static async saveJson(jsonName, data) {
         try {
@@ -139,7 +148,7 @@ class RandomGeoCoordinatesController {
 
         let ibgeCode = Object.keys(ibgeCodesJson).find(key => ibgeCodesJson[key] == cityName);
 
-        let url = "http://api.sidra.ibge.gov.br/values/t/1301/p/2010/v/616/n6/" + ibgeCode;
+        let url = ibgeUrl + ibgeCode;
 
         return await axios.get(url)
             .then((response) => {
