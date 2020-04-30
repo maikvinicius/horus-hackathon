@@ -10,16 +10,39 @@ let map;
 let centermarker;
 let markerCluster;
 let infowindowCluster;
-
-//Start autocomplete
-let input = document.getElementById("cidades");
-let options = {
-  componentRestrictions: { country: "br" },
-};
 let autocomplete;
 
 function initMap() {
+  //Start autocomplete
+  let input = document.getElementById("cidades");
+  let options = {
+    componentRestrictions: { country: "br" },
+  };
   autocomplete = new google.maps.places.Autocomplete(input, options);
+  google.maps.event.addListener(autocomplete, "place_changed", function () {
+    let place = autocomplete.getPlace();
+    lat = place.geometry.location.lat();
+    lng = place.geometry.location.lng();
+    axios
+      .get("https://api.opencagedata.com/geocode/v1/json", {
+        params: {
+          q: String(lat) + ", " + String(lng),
+          key: "f4ee44678a53425884dc6e32c3e927be",
+          pretty: "1",
+          no_annotations: "1",
+          countrycode: "br",
+        },
+      })
+      .then(function (response) {
+        city = response.data.results[0].components.city;
+        if ($("#cidades").val() != "" && $("#products").val() != "") {
+          newLocation(lat, lng);
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  });
   //Create the default map
   mapcenter = new google.maps.LatLng(lat, lng);
   let myOptions = {

@@ -282,32 +282,6 @@
         }
       });
 
-      $("#cidades").change(function () {
-        console.log("cidades change: " + $(this).val());
-        axios
-          .get("https://api.opencagedata.com/geocode/v1/json", {
-            params: {
-              q: $(this).val(),
-              key: "f4ee44678a53425884dc6e32c3e927be",
-              pretty: "1",
-              no_annotations: "1",
-              countrycode: "br",
-            },
-          })
-          .then(function (response) {
-            city = response.data.results[0].components.city;
-            lat = response.data.results[0].geometry.lat;
-            lng = response.data.results[0].geometry.lng;
-            console.log(response);
-            if ($("#cidades").val() != "" && $("#products").val() != "") {
-              newLocation(lat, lng);
-            }
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-      });
-
       $("#raio").change(function () {
         if ($("#cidades").val() != "" && $("#products").val() != "") {
           distanceLimit = parseInt($(this).val());
