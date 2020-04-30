@@ -12,12 +12,21 @@ let markerCluster;
 let infowindowCluster;
 
 function initMap() {
+  //Start autocomplete
+  var input = document.getElementById("cidades");
+  var options = {
+    types: ["(all)"],
+    componentRestrictions: { country: "br" },
+  };
+  autocomplete = new google.maps.places.Autocomplete(input, options);
+
   //Create the default map
   mapcenter = new google.maps.LatLng(lat, lng);
   let myOptions = {
     zoom: mapZoomLevel,
     scaleControl: true,
     center: mapcenter,
+    disableDefaultUI: true,
   };
   map = new google.maps.Map(document.getElementById("map"), myOptions);
   infowindowCluster = new google.maps.InfoWindow();
