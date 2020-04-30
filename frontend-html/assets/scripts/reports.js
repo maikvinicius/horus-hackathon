@@ -1,3 +1,4 @@
+// Create Reports
 function reports(ctx, type, dataset, text = "Gráfico") {
   var values = [];
   var labels = [];
@@ -60,4 +61,5 @@ function reports(ctx, type, dataset, text = "Gráfico") {
   text = text.replace(new RegExp("[ÚÙÛ]", "gi"), "u");
   text = text.replace(new RegExp("[Ç]", "gi"), "c");
   eval(text + " = new Chart(ctx, {type,data,options,})");
+  $(".reports").show();
 }

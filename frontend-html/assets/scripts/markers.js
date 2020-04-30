@@ -87,34 +87,42 @@ function createReports(jsonResponse) {
 
 //Create markers for the randomly generated points
 function createMarkers(map) {
+  $(".loading").show();
   let response = requestMarkers();
 
-  response.then((jsonResponse) => {
-    //Create Reports
-    createReports(jsonResponse);
+  response
+    .then((jsonResponse) => {
+      //Create Reports
+      createReports(jsonResponse);
 
-    jsonResponse.forEach((mappoint) => {
-      //Map points without the east/west adjustment
-      let newmappoint = new google.maps.LatLng(
-        mappoint.latitude,
-        mappoint.longitude
-      );
+      jsonResponse.forEach((mappoint) => {
+        //Map points without the east/west adjustment
+        let newmappoint = new google.maps.LatLng(
+          mappoint.latitude,
+          mappoint.longitude
+        );
 
-      let title =
-        mappoint.product + " | " + mappoint.sex + " | " + mappoint.age;
+        let title =
+          mappoint.product + " | " + mappoint.sex + " | " + mappoint.age;
 
-      let marker = new google.maps.Marker({
-        position: newmappoint,
-        map: map,
-        title: title,
-        zIndex: 2,
+        let marker = new google.maps.Marker({
+          position: newmappoint,
+          map: map,
+          title: title,
+          zIndex: 2,
+        });
+
+        markers.push(marker);
       });
-
-      markers.push(marker);
+      createCluster();
+      drawRadiusCircle(map, centermarker, distanceLimit);
+    })
+    .catch(() => {
+      //error
+    })
+    .then(() => {
+      $(".loading").hide();
     });
-
-    createCluster();
-  });
 }
 //Destroy all markers
 function clearMarkers() {
@@ -139,7 +147,6 @@ function newLocation(lat, lng) {
     console.log("first request");
   }
   clearMarkers();
-  drawRadiusCircle(map, centermarker, distanceLimit);
   createMarkers(map);
   createCluster();
 }

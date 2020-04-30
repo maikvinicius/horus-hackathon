@@ -118,96 +118,96 @@
 
         <!-- CONTENT -->
         <div class="app-main__outer">
-          <div class="app-main__inner">
-            <div class="row">
-              <div class="col-md-12">
-                <div class="card">
-                  <div id="map" style="height: 600px;"></div>
+          <div class="row" style="margin-bottom: 20px;">
+            <div class="col-md-12">
+              <div class="card">
+                <div id="map" style="height: 600px;"></div>
+                <div class="loading"></div>
 
-                  <div class="row">
-                    <div
-                      class="col-md-6"
-                      style="
-                        position: absolute;
-                        margin-top: 20px;
-                        top: 0;
-                        left: 0;
-                      "
-                    >
-                      <div class="search-wrapper active" style="width: 85%;">
-                        <div
-                          class="input-holder"
-                          style="width: 100%; background: whitesmoke;"
-                        >
-                          <input
-                            type="text"
-                            class="search-input"
-                            id="products"
-                            placeholder="Ex.: Bolo de milho, Café, Pão..."
-                            required
-                          />
-                          <button class="search-icon" style="z-index: 0;">
-                            <span></span>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div
-                      class="col-md-4"
-                      style="
-                        position: absolute;
-                        margin-top: 90px;
-                        top: 0;
-                        left: 0;
-                      "
-                    >
-                      <div class="search-wrapper active" style="width: 85%;">
-                        <div
-                          class="input-holder"
-                          style="width: 100%; background: whitesmoke;"
-                        >
-                          <input
-                            type="text"
-                            class="search-input"
-                            id="cidades"
-                            name="cidades"
-                            placeholder="Ex.: Rua Joaquim Moreira"
-                            required
-                          />
-                          <button class="search-icon" style="z-index: 0;">
-                            <span></span>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div
-                      class="col-md-2"
-                      style="
-                        position: absolute;
-                        margin-top: 160px;
-                        top: 0px;
-                        left: 10px;
-                      "
-                    >
-                      <select
-                        class="mb-2 form-control"
-                        name="raio"
-                        id="raio"
-                        style="width: 130px;"
+                <div class="row">
+                  <div
+                    class="col-md-6"
+                    style="
+                      position: absolute;
+                      margin-top: 45px;
+                      top: 0;
+                      left: 0;
+                    "
+                  >
+                    <div class="search-wrapper active" style="width: 85%;">
+                      <div
+                        class="input-holder"
+                        style="width: 100%; background: whitesmoke;"
                       >
-                        <option value="5000">5 Km</option>
-                        <option value="8000">8 Km</option>
-                        <option value="10000">10 Km</option>
-                      </select>
+                        <input
+                          type="text"
+                          class="search-input"
+                          id="products"
+                          placeholder="Ex.: Bolo de milho, Café, Pão..."
+                          required
+                        />
+                        <button class="search-icon" style="z-index: 0;">
+                          <span></span>
+                        </button>
+                      </div>
                     </div>
+                  </div>
+
+                  <div
+                    class="col-md-4"
+                    style="
+                      position: absolute;
+                      margin-top: 102px;
+                      top: 0;
+                      left: 0;
+                    "
+                  >
+                    <div class="search-wrapper active" style="width: 85%;">
+                      <div
+                        class="input-holder"
+                        style="width: 100%; background: whitesmoke;"
+                      >
+                        <input
+                          type="text"
+                          class="search-input"
+                          id="cidades"
+                          name="cidades"
+                          placeholder="Ex.: Rua Joaquim Moreira"
+                          required
+                        />
+                        <button class="search-icon" style="z-index: 0;">
+                          <span></span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    class="col-md-2"
+                    style="
+                      position: absolute;
+                      margin-top: 160px;
+                      top: 0px;
+                      left: 10px;
+                    "
+                  >
+                    <select
+                      class="mb-2 form-control"
+                      name="raio"
+                      id="raio"
+                      style="width: 130px;"
+                    >
+                      <option value="5000">5 Km</option>
+                      <option value="8000">8 Km</option>
+                      <option value="10000">10 Km</option>
+                    </select>
                   </div>
                 </div>
               </div>
             </div>
-
-            <div class="row" style="margin-top: 20px;">
+          </div>
+          <div class="app-main__inner">
+            <div class="row reports">
               <div class="col-md-4 mx-auto">
                 <div class="main-card mb-2 card">
                   <div class="card-body">
@@ -359,6 +359,8 @@
     </script>
 
     <script>
+      //Default hide reports row
+      $(".reports").hide();
       //Start charts
       var Generos = new Chart($("#ctx-peoples"), {
         type: "bar",
@@ -377,6 +379,14 @@
         data: {},
         options: {},
       });
+
+      //Remove warning google maps dev
+      var checkExist = setInterval(function () {
+        if ($(".dismissButton").length) {
+          $(".dismissButton").parent().parent().parent().parent().hide();
+          clearInterval(checkExist);
+        }
+      }, 100); //check every 100ms
     </script>
     <script
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBQ8qeiy3ebFi5ONjisQ004oo4s1Ksi7w&callback=initMap"
