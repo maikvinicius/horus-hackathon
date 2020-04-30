@@ -34,9 +34,12 @@ function initMap() {
         },
       })
       .then(function (response) {
-        city = response.data.results[0].components.city;
-        if (typeof city != String) {
+        //Check if exists key city in response
+        let resp = response.data.results[0].components;
+        if (!("city" in resp)) {
           city = response.data.results[0].components.city_district;
+        } else {
+          city = response.data.results[0].components.city;
         }
         if ($("#cidades").val() != "" && $("#products").val() != "") {
           newLocation(lat, lng);
