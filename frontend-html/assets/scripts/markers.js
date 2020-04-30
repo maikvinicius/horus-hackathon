@@ -11,15 +11,15 @@ let centermarker;
 let markerCluster;
 let infowindowCluster;
 
-function initMap() {
-  //Start autocomplete
-  var input = document.getElementById("cidades");
-  var options = {
-    types: ["(all)"],
-    componentRestrictions: { country: "br" },
-  };
-  autocomplete = new google.maps.places.Autocomplete(input, options);
+//Start autocomplete
+let input = document.getElementById("cidades");
+let options = {
+  componentRestrictions: { country: "br" },
+};
+let autocomplete;
 
+function initMap() {
+  autocomplete = new google.maps.places.Autocomplete(input, options);
   //Create the default map
   mapcenter = new google.maps.LatLng(lat, lng);
   let myOptions = {
