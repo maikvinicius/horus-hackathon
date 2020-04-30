@@ -35,6 +35,9 @@ function initMap() {
       })
       .then(function (response) {
         city = response.data.results[0].components.city;
+        if (typeof city != String) {
+          city = response.data.results[0].components.city_district;
+        }
         if ($("#cidades").val() != "" && $("#products").val() != "") {
           newLocation(lat, lng);
         }
