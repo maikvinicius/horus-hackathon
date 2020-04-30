@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Language" content="br" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Hórus</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no"
+    />
+    <meta name="description" content="Sistema Hórus" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <link href="./main.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <div
+      class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header closed-sidebar"
+    >
+      <div class="app-header header-shadow">
+        <div class="app-header__logo">
+          <img
+            src="assets/images/logo-horus.png"
+            alt="Logo Hórus"
+            height="50px"
+          />
+          <div class="header__pane ml-auto">
+            <div>
+              <button
+                type="button"
+                class="hamburger close-sidebar-btn hamburger--elastic"
+                data-class="closed-sidebar"
+              >
+                <span class="hamburger-box">
+                  <span class="hamburger-inner"></span>
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="app-header__mobile-menu">
+          <div>
+            <button
+              type="button"
+              class="hamburger hamburger--elastic mobile-toggle-nav"
+            >
+              <span class="hamburger-box">
+                <span class="hamburger-inner"></span>
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="app-main">
+        <div class="app-sidebar sidebar-shadow">
+          <div class="app-header__logo">
+            <div class="logo-src"></div>
+            <div class="header__pane ml-auto">
+              <div>
+                <button
+                  type="button"
+                  class="hamburger close-sidebar-btn hamburger--elastic"
+                  data-class="closed-sidebar"
+                >
+                  <span class="hamburger-box">
+                    <span class="hamburger-inner"></span>
+                  </span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="app-header__mobile-menu">
+            <div>
+              <button
+                type="button"
+                class="hamburger hamburger--elastic mobile-toggle-nav"
+              >
+                <span class="hamburger-box">
+                  <span class="hamburger-inner"></span>
+                </span>
+              </button>
+            </div>
+          </div>
+          <div class="app-header__menu">
+            <span>
+              <button
+                type="button"
+                class="btn-icon btn-icon-only btn btn-primary btn-sm mobile-toggle-header-nav"
+              >
+                <span class="btn-icon-wrapper">
+                  <i class="fa fa-ellipsis-v fa-w-6"></i>
+                </span>
+              </button>
+            </span>
+          </div>
+          <div class="scrollbar-sidebar">
+            <div class="app-sidebar__inner">
+              <ul class="vertical-nav-menu">
+                <li class="app-sidebar__heading">Páginas</li>
+                <li>
+                  <a href="_index.html">
+                    <i class="metismenu-icon pe-7s-map-2"></i>
+                    Hórus
+                  </a>
+                </li>
+                <li>
+                  <a href="_about.html">
+                    <i class="metismenu-icon pe-7s-display2"></i>
+                    Sobre
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- CONTENT -->
+        <div class="app-main__outer">
+          <div class="app-main__inner">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card">
+                  <div id="map" style="height: 600px;"></div>
+
+                  <div class="row">
+                    <div
+                      class="col-md-6"
+                      style="
+                        position: absolute;
+                        margin-top: 20px;
+                        top: 0;
+                        left: 0;
+                      "
+                    >
+                      <div class="search-wrapper active" style="width: 85%;">
+                        <div
+                          class="input-holder"
+                          style="width: 100%; background: whitesmoke;"
+                        >
+                          <input
+                            type="text"
+                            class="search-input"
+                            id="products"
+                            placeholder="Ex.: Bolo de milho, Café, Pão..."
+                            required
+                          />
+                          <button class="search-icon" style="z-index: 0;">
+                            <span></span>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div
+                      class="col-md-4"
+                      style="
+                        position: absolute;
+                        margin-top: 90px;
+                        top: 0;
+                        left: 0;
+                      "
+                    >
+                      <div class="search-wrapper active" style="width: 85%;">
+                        <div
+                          class="input-holder"
+                          style="width: 100%; background: whitesmoke;"
+                        >
+                          <input
+                            type="text"
+                            class="search-input"
+                            id="cidades"
+                            name="cidades"
+                            placeholder="Ex.: Rua Joaquim Moreira"
+                            required
+                          />
+                          <button class="search-icon" style="z-index: 0;">
+                            <span></span>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div
+                      class="col-md-2"
+                      style="
+                        position: absolute;
+                        margin-top: 160px;
+                        top: 0px;
+                        left: 10px;
+                      "
+                    >
+                      <select
+                        class="mb-2 form-control"
+                        name="raio"
+                        id="raio"
+                        style="width: 130px;"
+                      >
+                        <option value="5000">5 Km</option>
+                        <option value="8000">8 Km</option>
+                        <option value="10000">10 Km</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row" style="margin-top: 20px;">
+              <div class="col-md-4 mx-auto">
+                <div class="main-card mb-2 card">
+                  <div class="card-body">
+                    <canvas
+                      id="ctx-peoples"
+                      style="display: block; width: 100%; height: 270px;"
+                      class="chartjs-render-monitor"
+                    ></canvas>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 mx-auto">
+                <div class="main-card mb-2 card">
+                  <div class="card-body">
+                    <canvas
+                      id="ctx-ages"
+                      style="display: block; width: 100%; height: 270px;"
+                      class="chartjs-render-monitor"
+                    ></canvas>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 mx-auto">
+                <div class="main-card mb-2 card">
+                  <div class="card-body">
+                    <canvas
+                      id="ctx-products"
+                      style="display: block; width: 100%; height: 270px;"
+                      class="chartjs-render-monitor"
+                    ></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-3 mx-auto">
+                <div class="main-card mb-3 card">
+                  <div class="card-body">
+                    <center>
+                      <i
+                        class="metismenu-icon pe-7s-display2"
+                        style="font-size: 3rem;"
+                      ></i>
+                      <hr />
+                      <b>Campanha Google</b>
+                    </center>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-3 mx-auto">
+                <div class="main-card mb-3 card">
+                  <div class="card-body">
+                    <center>
+                      <i
+                        class="metismenu-icon pe-7s-display2"
+                        style="font-size: 3rem;"
+                      ></i>
+                      <hr />
+                      <b>Campanha Twitter</b>
+                    </center>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-3 mx-auto">
+                <div class="main-card mb-3 card">
+                  <div class="card-body">
+                    <center>
+                      <i
+                        class="metismenu-icon pe-7s-display2"
+                        style="font-size: 3rem;"
+                      ></i>
+                      <hr />
+                      <b>Campanha Facebook</b>
+                    </center>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-3 mx-auto">
+                <div class="main-card mb-3 card">
+                  <div class="card-body">
+                    <center>
+                      <i
+                        class="metismenu-icon pe-7s-display2"
+                        style="font-size: 3rem;"
+                      ></i>
+                      <hr />
+                      <b>Campanha MLabs</b>
+                    </center>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- END CONTENT -->
+      </div>
+    </div>
+    <script type="text/javascript" src="./assets/scripts/main.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-2.2.4.js"
+      integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
+      crossorigin="anonymous"
+    ></script>
+
+    <script src="./assets/scripts/reports.js"></script>
+    <script src="./assets/scripts/markers.js"></script>
+
+    <script>
+      $("#products").change(function () {
+        if ($(this).val() != "" && $("#cidades").val() != "") {
+          newLocation(lat, lng);
+        }
+      });
+
+      $("#cidades").change(function () {
+        axios
+          .get("https://api.opencagedata.com/geocode/v1/json", {
+            params: {
+              q: $(this).val(),
+              key: "f4ee44678a53425884dc6e32c3e927be",
+              pretty: "1",
+              no_annotations: "1",
+            },
+          })
+          .then(function (response) {
+            city = response.data.results[0].components.city;
+            lat = response.data.results[0].geometry.lat;
+            lng = response.data.results[0].geometry.lng;
+            if ($("#cidades").val() != "" && $("#products").val() != "") {
+              newLocation(lat, lng);
+            }
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      });
+
+      $("#raio").change(function () {
+        if ($("#cidades").val() != "" && $("#products").val() != "") {
+          distanceLimit = parseInt($(this).val());
+          newLocation(lat, lng);
+        }
+      });
+    </script>
+
+    <script>
+      //Start charts
+      var Generos = new Chart($("#ctx-peoples"), {
+        type: "bar",
+        data: {},
+        options: {},
+      });
+
+      var Produtos = new Chart($("#ctx-products"), {
+        type: "bar",
+        data: {},
+        options: {},
+      });
+
+      var Idade = new Chart($("#ctx-ages"), {
+        type: "bar",
+        data: {},
+        options: {},
+      });
+    </script>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBQ8qeiy3ebFi5ONjisQ004oo4s1Ksi7w&callback=initMap"
+      async
+      defer
+    ></script>
+    <script src="https://unpkg.com/@google/markerclustererplus@4.0.1/dist/markerclustererplus.min.js"></script>
+  </body>
+</html>
