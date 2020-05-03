@@ -6,6 +6,7 @@
 
 O [Hórus](https://horus-hackathon.herokuapp.com/) é uma proposta de solução para o 4˚ Desafio de Inovação do IFSP ["Hackorona - Hackeando a Crise, Salvando Negócios"](https://inova.ifsp.edu.br/index.php/editais/184-edital-149-2020-desafio-de-inovacao-hackorona-hackeando-a-crise-salvando-negocios) de 2020. O protótipo de Sistema foi desenvolvido pela equipe Limos do [IFSP](http://ifspcjo.edu.br/) de Campos do Jordão.
 
+* [Anexo II EDITAL 149_2020](https://github.com/maikvinicius/horus-hackathon/blob/master/images/Anexo_II_EDITAL__149_2020.pdf)
 
 
 ## O sistema:
