@@ -1,165 +1,57 @@
-# Contribuindo com o Projeto
+## Hórus: encontrando os seus clientes
 
-  
+###### 4˚ Desafio de Inovação: [Hackorona - Hackeando a Crise, Salvando Negócios](https://inova.ifsp.edu.br/index.php/editais/184-edital-149-2020-desafio-de-inovacao-hackorona-hackeando-a-crise-salvando-negocios)
 
-Antes de dar qualquer contribuição, verifique as `issues` desse repositório para que você saiba com o que contribuir. 😉
 
-  
 
-## Começando a Contribuir
+O [Hórus](https://horus-hackathon.herokuapp.com/) é uma proposta de solução para o 4˚ Desafio de Inovação do IFSP ["Hackorona - Hackeando a Crise, Salvando Negócios"](https://inova.ifsp.edu.br/index.php/editais/184-edital-149-2020-desafio-de-inovacao-hackorona-hackeando-a-crise-salvando-negocios) de 2020. O protótipo de Sistema foi desenvolvido pela equipe Limos do [IFSP](http://ifspcjo.edu.br/) de Campos do Jordão.
 
-  
 
-Dê um `fork` nesse repositório e clone para sua máquina local:
 
-  
+## O sistema:
 
-```bash
 
-git clone https://github.com/<seu-nome-de-usuario-github>/limos-hackathon.git
 
-```
+Inspirado no proverbio grego "Se Maomé não vai à montanha, a montanha vai a Maomé" o Sistemas Hórus propõe em fazer uma inversão na utilização dos conhecimentos de Advertising. 
 
-  
+#### Se o Cliente não vai ao comércio, o comércio vá ao Cliente.
 
-## Antes de dar Commits
+![alt text](https://github.com/maikvinicius/horus-hackathon/blob/master/images/map-web.png)
 
-  
 
-Devido ao escasso tempo para disponibilizar a aplicação em produção, definimos algumas regras para dar `commits`:
 
-  
-  
+Também desenvolvemos uma versão mobile para a proposta, disponível [aqui](https://exp.host/@maikvinicius/horus-app) 
 
-- A `master` será usada para o `deploy` da aplicação.
 
-- Qualquer alteração será feita em um `branch` separado.
 
-- Após dar `fork` e clonar esse repositório, crie um `branch` com o seu nome de usuário do `github` e o título da tarefa que está executando:
+## Mais detalhes:
 
-  
+Em decorrência do isolamento social, provocado pela pandemia da COVID-19, diversas empresas e comércios estão sofrendo impactos negativos em seus fluxos de caixa, já que seus consumidores estão com a mobilidade e o descolamento restritos, impossibilitando ou reduzindo a tradicional comercialização e oferta de serviços. A idéia é aproveitar dos aprendizados dos ADS para localizar geosificamente onde um publico em potêncial esta em uma data região.
 
-```bash
+![alt text](https://github.com/maikvinicius/horus-hackathon/blob/master/images/inverse-model.png)
 
-#Exemplo:
 
-git checkout -b i-am-groot_style-form-components
 
-```
+* Video de apresentação do modelo de negócio.](https://www.youtube.com/watch?v=IEy9Dxg0TRc) 
 
-  
+* Video de apresentação técnica.](https://www.youtube.com/watch?v=IEy9Dxg0TRc) 
 
-- Qualquer alteração feita por você, deverá ser feita dentro desse branch.
 
-  
 
-## Commits
+## Equipe Limos:
 
-  
+* Lucas Ventura Moura Alves - [Github](https://github.com/lucasvma)
 
-Depois de fazer suas contribuição, chegou a hora dos commits. Pedimos que:
+* Maik Vinicius Guimaraes - [Github](https://github.com/maikvinicius)
 
-  
+* Leonam Mendonça Pereira - [Github](https://github.com/leonammp)
 
-- o texto do `commit` esteja em inglês
 
-- estamos vendo alguma forma de padronização dos textos dos `commits`. Até lá, pedimos para que vocês sigam um modelo semelhante ao [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/).
 
-  
+## Build With
 
-## Dando Commits
+* Node
 
-  
+* React native
 
-Na `branch` com seu nome e tarefa, faça os commits e envie seu branch e atualizações para a sua cópia do repositório, ou seja, aquele que você deu `fork`, através dos comandos:
-
-  
-
-```bash
-
-git push
-
-```
-
-  
-
-### Pull Request(PR)
-
-  
-
-Depois dos `commits`, chegou a hora do `Pull Request`. Aguarde o `code review`. Se estiver tudo certo, daremos um `merge` e você será notificado. Caso não tenha nenhuma alteração a ser feita, seu `branch` poderá ser deletado com segurança.
-
-  
-
-Caso contrário, você receberá uma mensagem de quem está fazendo o `code-review`. Veja o que precisa ser feito, faça as alterações, se necessário, e dê o `PR` de novo. Isso será feito até que sua contribuição seja aprovada.
-
-  
-
-## Atualizando o seu repositório local
-
-  
-
-Caso deseje continuar contribuindo, além de seguir os passos anteriores, sugerimos fortemente que você sempre atualize o seu repositório local, especialmente antes de começar a trabalhar em uma nova tarefa.
-
-  
-
-Existem algumas formas de fazer, mas vou deixar uma sugestão de comandos e passos para seguir:
-
-  
-
-Entre na pasta do projeto e, no `branch master`, adicione como repositório remoto aquele de onde virá a atualização, no caso este aqui:
-
-  
-
-```bash
-
-git remote add upstream https://github.com/maikvinicius/limos-hackathon.git
-
-```
-
-  
-
-Busque pela atualizações:
-
-  
-
-```bash
-
-git fetch upstream
-
-```
-
-  
-
-Nesse ponto, você pode usar os comandos de `merge` ou `rebase`. Aqui vamos usar `rebase`:
-
-  
-
-```bash
-
-git rebase upstream/master
-
-```
-
-  
-
-Envie as atualizações para o seu repositório no GitHub(`origin`):
-
-  
-
-```bash
-
-git push origin master
-
-```
-
-  
-
-## Antes de abrir uma `issue`
-
-  
-
-Na aba `issues`, verifique se já não existe uma `issue` similar ao problema/sugestão que deseja reportar.
-
----
-Page create by [vanribeiro](https://github.com/vanribeiro)
+* Google Maps
