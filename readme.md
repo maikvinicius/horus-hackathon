@@ -36,7 +36,7 @@ Em decorrência do isolamento social, provocado pela pandemia da COVID-19, diver
 
 * [Video de apresentação do modelo de negócio.](https://www.youtube.com/watch?v=UmRGArxZb2Y) 
 
-* [Video de apresentação técnica.](https://www.youtube.com/watch?v=IEy9Dxg0TRc) 
+* [Video de apresentação técnica.](https://www.youtube.com/watch?v=tcm31rGLqJM) 
 
 
 
