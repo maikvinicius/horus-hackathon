@@ -18,7 +18,11 @@ Inspirado no proverbio grego "Se Maomé não vai à montanha, a montanha vai a M
 
 ![alt text](https://github.com/maikvinicius/horus-hackathon/blob/master/images/map-web.png)
 
+![alt text](https://github.com/maikvinicius/horus-hackathon/blob/master/images/app-1.png)
 
+![alt text](https://github.com/maikvinicius/horus-hackathon/blob/master/images/app-2.png)
+
+![alt text](https://github.com/maikvinicius/horus-hackathon/blob/master/images/app-3.png)
 
 Também desenvolvemos uma versão mobile para a proposta, disponível [aqui](https://exp.host/@maikvinicius/horus-app) 
 
@@ -32,9 +36,9 @@ Em decorrência do isolamento social, provocado pela pandemia da COVID-19, diver
 
 
 
-* Video de apresentação do modelo de negócio.](https://www.youtube.com/watch?v=IEy9Dxg0TRc) 
+* [Video de apresentação do modelo de negócio.](https://www.youtube.com/watch?v=IEy9Dxg0TRc) 
 
-* Video de apresentação técnica.](https://www.youtube.com/watch?v=IEy9Dxg0TRc) 
+* [Video de apresentação técnica.](https://www.youtube.com/watch?v=IEy9Dxg0TRc) 
 
 
 
