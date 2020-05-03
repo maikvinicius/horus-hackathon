@@ -82,7 +82,7 @@ class RandomGeoCoordinatesController {
 
     static async randomData(longitude, latitude, radius, productsArray, amountRandomPoints) {
         let dataArray = [],
-            qtSex = Math.floor(Math.random() * 70);
+            qtSex = Math.floor(Math.random() * 69 + 1);
 
         let sexArray = [
             { weight: qtSex, sex: 'Masculino' },
