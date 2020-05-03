@@ -18,13 +18,11 @@ Inspirado no proverbio grego "Se Maomé não vai à montanha, a montanha vai a M
 
 ![alt text](https://github.com/maikvinicius/horus-hackathon/blob/master/images/map-web.png)
 
-![alt text](https://github.com/maikvinicius/horus-hackathon/blob/master/images/app-1.png)
-
-![alt text](https://github.com/maikvinicius/horus-hackathon/blob/master/images/app-2.png)
-
-![alt text](https://github.com/maikvinicius/horus-hackathon/blob/master/images/app-3.png)
-
 Também desenvolvemos uma versão mobile para a proposta, disponível [aqui](https://exp.host/@maikvinicius/horus-app) 
+
+* [Home do aplicativo com a busca](https://github.com/maikvinicius/horus-hackathon/blob/master/images/app-1.png) 
+* [Resultado em gráfico de pizza](https://github.com/maikvinicius/horus-hackathon/blob/master/images/app-2.png) 
+* [Sobre o projeto](https://github.com/maikvinicius/horus-hackathon/blob/master/images/app-3.png) 
 
 
 
